@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Advice generator app</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+
+</head>
+
+<body>
+  <div class="container">
+    <h5> Advice #<span class="advice_id" id="advice_id"></span></h5>
+    <p class="advice_info" id="advice_info">
+    </p>
+
+    <img class="seprator_border" src="./images/pattern-divider-desktop.svg" alt="" srcset="">
+    <button class="btn" id="btn">
+      <img src="./images/icon-dice.svg" alt="" srcset="">
+    </button>
+  </div>
+  <!-- 
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Avinash Shukla</a>.
+  </div> -->
+  <script>
+    const API = 'https://api.adviceslip.com/advice';
+    let _id = document.getElementById('advice_id');
+    let _info = document.getElementById('advice_info')
+
+    function setData() {
+      let fetchRes = fetch(API);
+      // fetchRes is the promise to resolve
+      // it by using.then() method
+      fetchRes.then(res =>
+        res.json()).then(d => {
+          d = d.slip
+          _id.innerHTML = `${d.id}`
+          _info.innerText = `"${d.advice}"`
+        })
+    }
+
+    let btn = document.getElementById('btn');
+    btn.addEventListener("click",
+      function () {
+        setData();
+      });
+
+
+    setData();
+
+  </script>
+
+</body>
+
+
+
+</html>
